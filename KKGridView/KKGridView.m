@@ -321,7 +321,11 @@ struct KKSectionMetrics {
         _dataSourceRespondsTo.sectionIndexTitles = RESPONDS_TO(sectionIndexTitlesForGridView:);
         _dataSourceRespondsTo.sectionForSectionIndexTitle = RESPONDS_TO(gridView:sectionForSectionIndexTitle:atIndex:);
 #undef RESPONDS_TO
-        [self reloadData];
+        // Raj: ReloadData in the current run loop will cause self.view not to load and if there is any dependency within the reload calls on it, the view will be spawned again! This results in an infinite loop
+//        [self reloadData];
+        [self performSelector:@selector(reloadData)
+                   withObject:nil
+                   afterDelay:0.0];
     }
 }
 
