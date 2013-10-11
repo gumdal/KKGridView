@@ -916,7 +916,7 @@ struct KKSectionMetrics {
     point.x += (column * (_cellSize.width + _cellPadding.width));
 
     if (indexPath.section == 1) {
-        NSLog(@"%@", NSStringFromCGRect(CGRectIntegral((CGRect){point, _cellSize})));
+//        NSLog(@"%@", NSStringFromCGRect(CGRectIntegral((CGRect){point, _cellSize})));
     }
     
     return CGRectIntegral((CGRect){point, _cellSize});
@@ -972,7 +972,7 @@ struct KKSectionMetrics {
     
     for (KKIndexPath *keyPath in allVisibleIndexPaths) {
         KKGridViewCell *originalCell = [_visibleCells objectForKey:keyPath];
-        NSLog(@"%@", keyPath);
+//        NSLog(@"%@", keyPath);
         KKIndexPath *originalIndexPath = [keyPath copy];
         
         NSUInteger amountForPath = amount;
