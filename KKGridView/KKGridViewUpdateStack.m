@@ -49,7 +49,7 @@
 {
     if (![_itemsToUpdate containsObject:update]) {
         [_itemsToUpdate addObject:update];
-        CFDictionaryAddValue(_availableUpdates, objc_unretainedPointer(update.indexPath), objc_unretainedPointer(update));
+        CFDictionaryAddValue(_availableUpdates, (__bridge void*)(update.indexPath), (__bridge void*)(update));
         [self _sortItems];
         return YES;
     }
@@ -65,7 +65,7 @@
 
 - (void)removeUpdate:(KKGridViewUpdate *)update
 {
-    CFDictionaryRemoveValue(_availableUpdates, objc_unretainedPointer(update.indexPath));
+    CFDictionaryRemoveValue(_availableUpdates, (__bridge void*)(update.indexPath));
     [_itemsToUpdate removeObject:update];
 }
 
@@ -76,12 +76,12 @@
 
 - (KKGridViewUpdate *)updateForIndexPath:(KKIndexPath *)indexPath
 {   
-    return objc_unretainedObject(CFDictionaryGetValue(_availableUpdates, objc_unretainedPointer(indexPath)));
+    return (__bridge id)(CFDictionaryGetValue(_availableUpdates, (__bridge void*)(indexPath)));
 }
 
 - (BOOL)hasUpdateForIndexPath:(KKIndexPath *)indexPath
 {
-    KKGridViewUpdate *update = objc_unretainedObject(CFDictionaryGetValue(_availableUpdates, objc_unretainedPointer(indexPath)));
+    KKGridViewUpdate *update = (__bridge id)(CFDictionaryGetValue(_availableUpdates, (__bridge void*)(indexPath)));
     if (update && !update.animating)
         return YES;
 
